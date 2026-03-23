@@ -38,6 +38,9 @@ local TextBoxShapesSize = Instance.new("TextBox")
 local SubtituloAroundFly_4 = Instance.new("TextLabel")
 local TextBoxShapesRodar = Instance.new("TextBox")
 local SubtituloAroundFly_5 = Instance.new("TextLabel")
+local AtivarMiniGUn = Instance.new("TextButton")
+local ActivatedOrNotMiniGun = Instance.new("Frame")
+local TituloMiniGUn = Instance.new("TextLabel")
 
 --Properties:
 
@@ -50,7 +53,7 @@ MainDragable.Name = "Main(Dragable)"
 MainDragable.Parent = M4
 MainDragable.BackgroundColor3 = Color3.fromRGB(18, 20, 20)
 MainDragable.BorderColor3 = Color3.fromRGB(0, 0, 0)
-MainDragable.Position = UDim2.new(0.610586464, 0, 0.0954653919, 0)
+MainDragable.Position = UDim2.new(0.665565073, 0, 0.0847255364, 0)
 MainDragable.Size = UDim2.new(0, 476, 0, 32)
 
 TituloLeite.Name = "TituloLeite"
@@ -414,6 +417,40 @@ SubtituloAroundFly_5.TextSize = 25.000
 SubtituloAroundFly_5.TextWrapped = true
 SubtituloAroundFly_5.TextXAlignment = Enum.TextXAlignment.Left
 
+AtivarMiniGUn.Name = "AtivarMiniGUn"
+AtivarMiniGUn.Parent = Main2
+AtivarMiniGUn.BackgroundColor3 = Color3.fromRGB(63, 73, 76)
+AtivarMiniGUn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+AtivarMiniGUn.Position = UDim2.new(0.740493178, 0, 0.0242745839, 0)
+AtivarMiniGUn.Size = UDim2.new(0, 18, 0, 34)
+AtivarMiniGUn.ZIndex = 3
+AtivarMiniGUn.Font = Enum.Font.SourceSans
+AtivarMiniGUn.Text = ""
+AtivarMiniGUn.TextColor3 = Color3.fromRGB(0, 0, 0)
+AtivarMiniGUn.TextSize = 14.000
+
+ActivatedOrNotMiniGun.Name = "ActivatedOrNotMiniGun"
+ActivatedOrNotMiniGun.Parent = Main2
+ActivatedOrNotMiniGun.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+ActivatedOrNotMiniGun.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ActivatedOrNotMiniGun.Position = UDim2.new(0.739798248, 0, 0.03041449, 0)
+ActivatedOrNotMiniGun.Size = UDim2.new(0, 45, 0, 27)
+
+TituloMiniGUn.Name = "TituloMiniGUn"
+TituloMiniGUn.Parent = Main2
+TituloMiniGUn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TituloMiniGUn.BackgroundTransparency = 1.000
+TituloMiniGUn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TituloMiniGUn.BorderSizePixel = 0
+TituloMiniGUn.Position = UDim2.new(0.465542763, 0, 0.0189861283, 0)
+TituloMiniGUn.Size = UDim2.new(0, 118, 0, 38)
+TituloMiniGUn.Font = Enum.Font.Unknown
+TituloMiniGUn.Text = "MiniGun"
+TituloMiniGUn.TextColor3 = Color3.fromRGB(255, 255, 255)
+TituloMiniGUn.TextScaled = true
+TituloMiniGUn.TextSize = 43.000
+TituloMiniGUn.TextWrapped = true
+
 -- ============================================================
 -- LÓGICA DO SCRIPT
 -- ============================================================
@@ -436,6 +473,7 @@ local flyAtivo        = false
 local shapeMakerAtivo = false
 local shapeAtivo      = false
 local shapeAtual      = nil
+local miniGunAtivo    = false
 
 -- ============================================================
 -- TOGGLE VISUAL DOS BOTÕES
@@ -445,6 +483,7 @@ local INITIAL_X = {
     AroundFly  = 0.319440544,
     Fly        = 0.132072106,
     ShapeMaker = 0.317335278,
+    MiniGun    = 0.740493178,
 }
 local OFFSET_X = 0.06
 
@@ -707,18 +746,18 @@ local SHAPE_ALEMANHA = {
 }
 
 local SHAPE_FORMATO = {
-    { pos = Vector3.new(134.7,   35.5,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(1.8,  34.2, 2) },
-    { pos = Vector3.new(141.0,   19.4,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(32.8,  2.4, 2) },
-    { pos = Vector3.new(141.1,   42.1,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(14.6,  1.8, 2) },
-    { pos = Vector3.new(141.1,   52.5,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(14.6,  1.0, 2) },
-    { pos = Vector3.new(141.1,   50.3,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(2.6,   5.4, 2) },
-    { pos = Vector3.new(131.9,   6.2,   0), rot = Vector3.new(0, 0, 0), size = Vector3.new(15.0,  2.0, 2) },
-    { pos = Vector3.new(125.3,   12.9,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(1.8,  15.4, 2) },
-    { pos = Vector3.new(138.3,   13.4,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(2.2,  14.4, 2) },
-    { pos = Vector3.new(150.3,   6.2,   0), rot = Vector3.new(0, 0, 0), size = Vector3.new(15.0,  2.0, 2) },
-    { pos = Vector3.new(143.7,   12.9,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(1.8,  15.4, 2) },
-    { pos = Vector3.new(147.7,   36.3,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(2.2,  33.8, 2) },
-    { pos = Vector3.new(156.7,   13.4,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(2.2,  14.4, 2) },
+    { pos = Vector3.new(134.7,  35.5,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(1.8,  34.2, 2) },
+    { pos = Vector3.new(141.0,  19.4,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(32.8,  2.4, 2) },
+    { pos = Vector3.new(141.1,  42.1,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(14.6,  1.8, 2) },
+    { pos = Vector3.new(141.1,  52.5,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(14.6,  1.0, 2) },
+    { pos = Vector3.new(141.1,  50.3,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(2.6,   5.4, 2) },
+    { pos = Vector3.new(131.9,   6.2,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(15.0,  2.0, 2) },
+    { pos = Vector3.new(125.3,  12.9,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(1.8,  15.4, 2) },
+    { pos = Vector3.new(138.3,  13.4,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(2.2,  14.4, 2) },
+    { pos = Vector3.new(150.3,   6.2,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(15.0,  2.0, 2) },
+    { pos = Vector3.new(143.7,  12.9,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(1.8,  15.4, 2) },
+    { pos = Vector3.new(147.7,  36.3,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(2.2,  33.8, 2) },
+    { pos = Vector3.new(156.7,  13.4,  0), rot = Vector3.new(0, 0, 0), size = Vector3.new(2.2,  14.4, 2) },
 }
 
 local function normalizarShape(shape)
@@ -743,15 +782,14 @@ local function normalizarShape(shape)
     return resultado
 end
 
-local FOICE_NORM   = normalizarShape(SHAPE_FOICE)
+local FOICE_NORM    = normalizarShape(SHAPE_FOICE)
 local ALEMANHA_NORM = normalizarShape(SHAPE_ALEMANHA)
 local FORMATO_NORM  = normalizarShape(SHAPE_FORMATO)
 
 local shapePartes  = {}
 local shapeConexao = nil
 local shapeAnguloY = 0
-
-local PASSO = 1 -- 1 part a cada 1 stud
+local PASSO        = 1
 
 local function gerarPontosShape(shapeNorm, escala)
     local pontos = {}
@@ -759,10 +797,8 @@ local function gerarPontosShape(shapeNorm, escala)
         local off  = dado.offset * escala
         local sz   = dado.size * escala
         local rot  = dado.rot
-
         local comprimento = math.max(sz.X, sz.Y)
         local numPontos   = math.max(1, math.floor(comprimento / PASSO))
-
         local angRad = math.rad(rot.Z)
         local dirX, dirY
         if sz.X >= sz.Y then
@@ -772,7 +808,6 @@ local function gerarPontosShape(shapeNorm, escala)
             dirX = -math.sin(angRad)
             dirY =  math.cos(angRad)
         end
-
         for j = 0, numPontos - 1 do
             local t = (numPontos == 1) and 0 or (j / (numPontos - 1) - 0.5)
             local px = off.X + dirX * t * comprimento
@@ -797,36 +832,27 @@ local function ativarShapeComDados(shapeNorm, nomeShape)
     local partes = getUnanchoredParts()
     if #partes == 0 then return end
     shapePartes = {}
-    for _, p in ipairs(partes) do
-        table.insert(shapePartes, p)
-    end
+    for _, p in ipairs(partes) do table.insert(shapePartes, p) end
     claimOwnership(shapePartes)
     shapeAtivo   = true
     shapeAtual   = nomeShape
     shapeAnguloY = 0
-
     shapeConexao = RunService.Heartbeat:Connect(function(dt)
         if not RootPart or not RootPart.Parent then return end
-
         local tamanho = readNumber(TextBoxShapesSize, 10)
         local escala  = (tamanho / 10) * 0.5
-
         local velocidadeGirar = readNumber(TextBoxShapesRodar, 0)
         shapeAnguloY = shapeAnguloY + math.rad(velocidadeGirar) * dt
-
         local yawJogador = math.atan2(RootPart.CFrame.LookVector.X, RootPart.CFrame.LookVector.Z)
         local baseCF = CFrame.new(RootPart.Position)
             * CFrame.Angles(0, yawJogador + shapeAnguloY, 0)
             * CFrame.new(0, 0, 40)
-
         local pontos      = gerarPontosShape(shapeNorm, escala)
         local totalPontos = #pontos
-
         for i, part in ipairs(shapePartes) do
             if part and part.Parent then
                 local pIdx = ((i - 1) % totalPontos) + 1
                 local p    = pontos[pIdx]
-
                 local alvoPosicao = (baseCF * CFrame.new(p.X, p.Y, p.Z)).Position
                 local direcao     = alvoPosicao - part.Position
                 part.AssemblyLinearVelocity  = direcao * 12
@@ -841,15 +867,12 @@ local function ativarBola()
     local partes = getUnanchoredParts()
     if #partes == 0 then return end
     shapePartes = {}
-    for _, p in ipairs(partes) do
-        table.insert(shapePartes, p)
-    end
+    for _, p in ipairs(partes) do table.insert(shapePartes, p) end
     claimOwnership(shapePartes)
     shapeAtivo   = true
     shapeAtual   = "bola"
     shapeAnguloY = 0
     local total  = #shapePartes
-
     local pontosEsfera = {}
     local goldenRatio  = (1 + math.sqrt(5)) / 2
     for i = 1, total do
@@ -861,21 +884,16 @@ local function ativarBola()
             math.sin(theta) * math.sin(phi)
         ))
     end
-
     shapeConexao = RunService.Heartbeat:Connect(function(dt)
         if not RootPart or not RootPart.Parent then return end
-
         local tamanho = readNumber(TextBoxShapesSize, 10)
         local raio    = tamanho * 1.5
-
         local velocidadeGirar = readNumber(TextBoxShapesRodar, 0)
         shapeAnguloY = shapeAnguloY + math.rad(velocidadeGirar) * dt
-
         local yawJogador = math.atan2(RootPart.CFrame.LookVector.X, RootPart.CFrame.LookVector.Z)
         local baseCF = CFrame.new(RootPart.Position)
             * CFrame.Angles(0, yawJogador + shapeAnguloY, 0)
             * CFrame.new(0, 0, 40)
-
         for i, part in ipairs(shapePartes) do
             if part and part.Parent then
                 local ponto = pontosEsfera[i]
@@ -922,6 +940,283 @@ FormatoDesejadoShapeMaker.MouseButton1Click:Connect(function()
     if shapeAtual == "formato" then desativarShape()
     else ativarShapeComDados(FORMATO_NORM, "formato") end
 end)
+
+-- ============================================================
+-- MINIGUN
+-- ============================================================
+local miniGunTool       = nil
+local miniGunConexao    = nil
+local miniGunProjétil   = nil
+local miniGunSegurando  = false
+local miniGunAnimTrack  = nil
+
+local function criarMiniGun()
+    -- Cria o modelo da minigun como Tool
+    local tool = Instance.new("Tool")
+    tool.Name = "MiniGun"
+    tool.RequiresHandle = true
+    tool.CanBeDropped = false
+
+    -- Model principal
+    local modelMG = Instance.new("Model", tool)
+    modelMG.Name = "MiniGun"
+
+    local model1 = Instance.new("Model", modelMG)
+    model1.Name = "Model1"
+
+    -- Função auxiliar para criar partes
+    local function makePart(parent, name, cf, size, color, material, transparency)
+        local p = Instance.new("Part", parent)
+        p.Name = name
+        p.Anchored = false
+        p.CanCollide = false
+        p.CFrame = cf
+        p.Size = size
+        p.Color = color
+        p.Material = material or Enum.Material.SmoothPlastic
+        p.Transparency = transparency or 0
+        p.BackSurface = Enum.SurfaceType.Smooth
+        p.BottomSurface = Enum.SurfaceType.Smooth
+        p.FrontSurface = Enum.SurfaceType.Smooth
+        p.LeftSurface = Enum.SurfaceType.Smooth
+        p.RightSurface = Enum.SurfaceType.Smooth
+        p.TopSurface = Enum.SurfaceType.Smooth
+        return p
+    end
+
+    local earthGreen    = Color3.new(0.188235, 0.215686, 0.219608)
+    local blackMetal    = Color3.new(0.101961, 0.117647, 0.117647)
+    local reallyBlack   = Color3.new(0, 0, 0)
+    local black         = Color3.new(0.164706, 0.188235, 0.188235)
+    local darkGrey      = Color3.new(0.27451, 0.317647, 0.317647)
+    local darkGrey2     = Color3.new(0.286275, 0.329412, 0.329412)
+    local darkGrey3     = Color3.new(0.317647, 0.360784, 0.368627)
+    local almostBlack   = Color3.new(0.105882, 0.117647, 0.121569)
+    local veryDarkBlack = Color3.new(0.0196078, 0.0235294, 0.0235294)
+    local darkBlack1    = Color3.new(0.0588235, 0.0705882, 0.0705882)
+
+    local rot30 = CFrame.new(0,0,0, 1,0,0, 0,0.866025388,-0.5, 0,0.5,0.866025388)
+    local rot30_n23 = CFrame.new(0,0,0, 0.920504868,0.390731126,0, -0.338383079,0.797180533,-0.5, -0.195365563,0.460252404,0.866025388)
+    local rot30_42 = CFrame.new(0,0,0, 0.743144929,-0.669130683,0, 0.579484165,0.643582404,-0.5, 0.334565341,0.371572465,0.866025388)
+    local rot_n5 = CFrame.new(0,0,0, 1,0,0, 0,0.996194601,0.0871557295, 0,-0.0871557295,0.996194601)
+
+    makePart(model1,"Part1",CFrame.new(13.9506798,3.14967132,-23.9655476)*rot30,Vector3.new(0.131,0.518,0.645),earthGreen)
+    makePart(model1,"Part1",CFrame.new(14.2736702,3.32887316,-23.8620853)*rot30,Vector3.new(0.777,0.105,0.645),earthGreen)
+    makePart(model1,"Part1",CFrame.new(14.3034782,4.27078056,-26.4517288)*rot30,Vector3.new(0.457,0.438,0.125),reallyBlack,Enum.Material.Neon)
+    makePart(model1,"Part1",CFrame.new(14.2783699,2.14570069,-22.8646069)*rot30,Vector3.new(0.144,0.132,0.610),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.2861214,2.30799198,-23.2607651)*rot30,Vector3.new(0.246,0.600,0.376),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.6845703,2.67974472,-23.4552994)*rot30_n23,Vector3.new(0.527,0.150,0.345),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.9579792,3.05419517,-24.0305424)*rot30,Vector3.new(0.180,0.126,0.114),almostBlack)
+    makePart(model1,"Part1",CFrame.new(14.7646294,3.04960251,-24.0297871)*rot30,Vector3.new(0.469,0.107,0.096),earthGreen)
+    makePart(model1,"Part1",CFrame.new(14.4091835,3.27136898,-25.0604343)*rot30_42,Vector3.new(0.109,0.113,2.825),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.2705212,3.25181866,-25.071722)*rot30,Vector3.new(0.109,0.113,2.825),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.4813232,3.37375593,-25.0013237)*rot30,Vector3.new(0.109,0.113,2.825),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.5961304,3.13011551,-23.976841)*rot30,Vector3.new(0.132,0.485,0.645),earthGreen)
+    makePart(model1,"Part1",CFrame.new(14.8471813,2.89743137,-24.1070175)*rot30,Vector3.new(0.070,0.365,0.069),almostBlack)
+    makePart(model1,"Part1",CFrame.new(14.5027714,2.70275116,-25.0874081)*rot30,Vector3.new(1.065,0.853,0.276),reallyBlack)
+    makePart(model1,"Part1",CFrame.new(14.519722,2.66083956,-25.0415154)*rot30,Vector3.new(1.153,0.966,0.064),reallyBlack,Enum.Material.Neon)
+    makePart(model1,"Part1",CFrame.new(14.3695221,1.86818004,-23.6982899)*rot30,Vector3.new(0.638,0.754,0.694),black)
+    makePart(model1,"Part1",CFrame.new(14.9075623,2.55017138,-23.4201813)*rot30_n23,Vector3.new(0.174,0.150,0.536),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.896677,2.59354496,-23.5061607)*rot30_n23,Vector3.new(0.197,0.205,0.385),darkGrey)
+    makePart(model1,"Part1",CFrame.new(14.5027714,2.3560009,-24.4868202)*rot30,Vector3.new(1.065,0.853,1.330),veryDarkBlack)
+    makePart(model1,"Part1",CFrame.new(14.2843208,2.82717395,-23.5977173)*rot30,Vector3.new(0.622,0.451,1.434),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.2835217,3.57553959,-24.8848228)*rot30,Vector3.new(0.109,0.113,2.825),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.1046219,3.3993032,-24.9865742)*rot30,Vector3.new(0.109,0.113,2.825),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.1523705,3.51837707,-24.9178257)*rot30_42,Vector3.new(0.109,0.113,2.825),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.1634674,3.28988004,-25.0497475)*rot30_42,Vector3.new(0.109,0.113,2.825),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.4312229,3.49866867,-24.929203)*rot30_42,Vector3.new(0.109,0.113,2.825),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.5141201,3.52360487,-23.7269707)*rot30,Vector3.new(0.114,0.577,0.079),earthGreen)
+    makePart(model1,"Part1",CFrame.new(14.2491207,3.73045468,-23.6075439)*rot30,Vector3.new(0.644,0.100,0.079),earthGreen)
+    makePart(model1,"Part1",CFrame.new(13.9744205,3.5342133,-23.7208424)*rot30,Vector3.new(0.094,0.553,0.079),earthGreen)
+    makePart(model1,"Part1",CFrame.new(14.2533684,3.73047972,-23.6116867)*rot30,Vector3.new(0.383,0.146,0.126),darkGrey3)
+    makePart(model1,"Part1",CFrame.new(13.7855206,3.00702405,-24.1320248)*rot30,Vector3.new(1.366,0.228,0.328),blackMetal)
+    makePart(model1,"Part1",CFrame.new(13.1377716,3.03349113,-24.1482677)*rot30,Vector3.new(0.330,0.261,0.349),darkGrey2)
+    makePart(model1,"Part1",CFrame.new(14.2783699,2.87786698,-22.7155571)*rot_n5,Vector3.new(0.144,0.140,1.085),blackMetal)
+    makePart(model1,"Part1",CFrame.new(14.2954788,3.25305891,-24.7050858)*rot30,Vector3.new(0.546,0.597,0.084),darkBlack1)
+    makePart(model1,"Part1",CFrame.new(14.2881298,3.55430889,-25.2268639)*rot30,Vector3.new(0.542,0.597,0.084),darkBlack1)
+
+    -- Handle (obrigatório para Tool)
+    local handle = makePart(model1,"Handle1",CFrame.new(14.2783699,2.46829343,-22.4103527)*rot30,Vector3.new(0.144,1.145,0.147),blackMetal)
+    handle.Name = "Handle1"
+
+    -- Ponta (origem do projétil)
+    local ponta = makePart(model1,"Ponta1",CFrame.new(14.3009796,4.092309,-26.1587067)*rot30,Vector3.new(0.583,0.597,0.778),darkBlack1)
+    ponta.Name = "Ponta1"
+
+    -- Handle da tool (parte que fica na mão)
+    local toolHandle = Instance.new("Part", tool)
+    toolHandle.Name = "Handle"
+    toolHandle.Size = Vector3.new(0.144, 1.145, 0.147)
+    toolHandle.CanCollide = false
+    toolHandle.Transparency = 1
+    toolHandle.CFrame = handle.CFrame
+
+    -- Solda todas as partes ao Handle da tool
+    for _, p in ipairs(model1:GetDescendants()) do
+        if p:IsA("BasePart") then
+            local weld = Instance.new("WeldConstraint")
+            weld.Part0 = toolHandle
+            weld.Part1 = p
+            weld.Parent = toolHandle
+        end
+    end
+
+    return tool, ponta
+end
+
+local miniGunProjetilPart   = nil
+local miniGunProjetilConex  = nil
+local miniGunSegClick       = nil
+
+local function pegarProjetil()
+    local partes = getUnanchoredParts()
+    if #partes == 0 then return nil end
+    local p = partes[1]
+    pcall(function()
+        partesOriginaisCanCollide[p] = p.CanCollide
+        p.CanCollide = true -- projétil tem colisão para acertar players
+        p:SetNetworkOwner(LocalPlayer)
+    end)
+    return p
+end
+
+local function desativarMiniGun()
+    if miniGunSegClick then miniGunSegClick:Disconnect() miniGunSegClick = nil end
+    if miniGunProjetilConex then miniGunProjetilConex:Disconnect() miniGunProjetilConex = nil end
+    if miniGunProjetilPart then
+        pcall(function()
+            miniGunProjetilPart.CanCollide = partesOriginaisCanCollide[miniGunProjetilPart] or true
+            partesOriginaisCanCollide[miniGunProjetilPart] = nil
+            miniGunProjetilPart:SetNetworkOwnershipAuto()
+        end)
+        miniGunProjetilPart = nil
+    end
+    if miniGunAnimTrack then
+        pcall(function() miniGunAnimTrack:Stop() end)
+        miniGunAnimTrack = nil
+    end
+    if miniGunTool then
+        miniGunTool:Destroy()
+        miniGunTool = nil
+    end
+end
+
+local function ativarMiniGun()
+    local tool, ponta = criarMiniGun()
+    miniGunTool = tool
+
+    -- Dá a tool ao jogador
+    tool.Parent = LocalPlayer.Backpack
+
+    -- Pega o projétil inicial
+    miniGunProjetilPart = pegarProjetil()
+
+    -- Ao equipar a tool
+    tool.Equipped:Connect(function()
+        -- Toca animação em loop
+        local char = LocalPlayer.Character
+        if char then
+            local hum = char:FindFirstChildOfClass("Humanoid")
+            if hum then
+                local anim = Instance.new("Animation")
+                anim.AnimationId = "rbxassetid://78878851226803"
+                local ok, track = pcall(function() return hum:LoadAnimation(anim) end)
+                if ok and track then
+                    miniGunAnimTrack = track
+                    track.Looped = true
+                    track:Play()
+                end
+            end
+        end
+
+        -- Loop do projétil girando na Ponta
+        local anguloGiro = 0
+        miniGunProjetilConex = RunService.Heartbeat:Connect(function(dt)
+            if not miniGunProjetilPart or not miniGunProjetilPart.Parent then
+                miniGunProjetilPart = pegarProjetil()
+                return
+            end
+            if not ponta or not ponta.Parent then return end
+
+            anguloGiro = anguloGiro + 20 * dt
+
+            if not miniGunSegurando then
+                -- Projétil fica girando ao redor da Ponta
+                local raio = 0.5
+                local alvo = ponta.Position + Vector3.new(
+                    math.cos(anguloGiro) * raio,
+                    math.sin(anguloGiro * 3) * 0.3,
+                    math.sin(anguloGiro) * raio
+                )
+                local direcao = alvo - miniGunProjetilPart.Position
+                miniGunProjetilPart.AssemblyLinearVelocity  = direcao * 30
+                miniGunProjetilPart.AssemblyAngularVelocity = Vector3.new(
+                    math.random(-30, 30),
+                    math.random(-30, 30),
+                    math.random(-30, 30)
+                )
+            else
+                -- Segurando: projétil vai na direção do mouse
+                local camera   = Workspace.CurrentCamera
+                local unitRay  = camera.CFrame.LookVector
+                local velocidade = 120
+                miniGunProjetilPart.AssemblyLinearVelocity  = unitRay * velocidade
+                miniGunProjetilPart.AssemblyAngularVelocity = Vector3.new(
+                    math.random(-50, 50),
+                    math.random(-50, 50),
+                    math.random(-50, 50)
+                )
+            end
+        end)
+
+        -- Detecta segurar/soltar botão esquerdo
+        miniGunSegClick = UserInputService.InputBegan:Connect(function(input, gpe)
+            if gpe then return end
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                miniGunSegurando = true
+            end
+        end)
+
+        local releaseConn
+        releaseConn = UserInputService.InputEnded:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                miniGunSegurando = false
+                -- Pega novo projétil quando solta
+                if miniGunProjetilPart then
+                    pcall(function()
+                        miniGunProjetilPart.CanCollide = partesOriginaisCanCollide[miniGunProjetilPart] or true
+                        partesOriginaisCanCollide[miniGunProjetilPart] = nil
+                        miniGunProjetilPart:SetNetworkOwnershipAuto()
+                    end)
+                end
+                miniGunProjetilPart = pegarProjetil()
+            end
+        end)
+    end)
+
+    tool.Unequipped:Connect(function()
+        miniGunSegurando = false
+        if miniGunAnimTrack then
+            pcall(function() miniGunAnimTrack:Stop() end)
+            miniGunAnimTrack = nil
+        end
+        if miniGunProjetilConex then miniGunProjetilConex:Disconnect() miniGunProjetilConex = nil end
+        if miniGunSegClick then miniGunSegClick:Disconnect() miniGunSegClick = nil end
+    end)
+end
+
+AtivarMiniGUn.MouseButton1Click:Connect(function()
+    miniGunAtivo = not miniGunAtivo
+    setButtonState(AtivarMiniGUn, INITIAL_X.MiniGun, miniGunAtivo)
+    if miniGunAtivo then
+        ActivatedOrNotMiniGun.BackgroundColor3 = Color3.fromRGB(0, 200, 80)
+        ativarMiniGun()
+    else
+        ActivatedOrNotMiniGun.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+        desativarMiniGun()
+    end
+end)
+
 -- ============================================================
 -- DESATIVAR TUDO AO MORRER
 -- ============================================================
@@ -951,6 +1246,12 @@ LocalPlayer.CharacterAdded:Connect(function(newChar)
         setButtonState(AtivarShapeMaker, INITIAL_X.ShapeMaker, false)
         ActivatedOrNotShapeMaker.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
         desativarShape()
+    end
+    if miniGunAtivo then
+        miniGunAtivo = false
+        setButtonState(AtivarMiniGUn, INITIAL_X.MiniGun, false)
+        ActivatedOrNotMiniGun.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+        desativarMiniGun()
     end
 end)
 
